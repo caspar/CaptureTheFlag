@@ -1,0 +1,24 @@
+POSSIBLE IDEAS FOR A FINAL PROJECT:
+
+GAMES:
+- frogger
+- finish wordsearch
+    - give it a category & difficulty function
+    - put it in the gui
+- bughouse (ideally using a web connection)
+    - ie, 2 chessboards & sets of pieces
+    - where you can use the pieces  that your teammate took
+    - I would not be able to test this, 
+    - but chesskids would be more than happy to
+-
+
+UTILITIES: 
+- A bunch of shell scripts?
+- A <physics?> homework-do'er
+- 
+
+MUSIC:
+- Another drum machine
+    - this time with additive synthesis & ADSR Envelope Generator!
+- Music-Maker
+- 
