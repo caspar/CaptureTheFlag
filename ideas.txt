@@ -10,12 +10,16 @@ GAMES:
     - where you can use the pieces  that your teammate took
     - I would not be able to test this, 
     - but chesskids would be more than happy to
--
+    - we could include a chat bar
+    - option to make the match/matches timed
+    - log of moves made
+    - 
+- family feud is still an option but I'm really liking the idea of bughouse
 
 UTILITIES: 
 - A bunch of shell scripts?
 - A <physics?> homework-do'er
-- 
+    - so basically, "enter your values here", with the formulas already entered?
 
 MUSIC:
 - Another drum machine
