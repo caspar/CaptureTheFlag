@@ -1,10 +1,28 @@
 POSSIBLE IDEAS FOR A FINAL PROJECT:
 
 GAMES:
+- Flag game!
+    - ID world flags
+    - fun facts about flags
+        - There will be an option to learn about the origin of the flag
+    - analytics
+        - Which Continent are you best at?
+        - Language?
+        - Color?
+        - Orientation
+        - Time
+
+    - makes you a more worldsy person - edumacational == Z will approve
+    - this wouldn't be hard, because we just have to load different images into a canvas-thing
+    - GUI-fy
+    - Link it to the Olympics somehow -Mamalant 
+    
 - frogger
+
 - finish wordsearch
     - give it a category & difficulty function
     - put it in the gui
+
 - bughouse (ideally using a web connection)
     - ie, 2 chessboards & sets of pieces
     - where you can use the pieces  that your teammate took
@@ -15,17 +33,59 @@ GAMES:
     - log of moves made
     * I don't reeeallly  want to do this because I'm not that into chess, and kinda stole the idea from Aaron
         - also it would involve something called "Network Architecture" - I learned this term today
+        - If we didn't use a web connection, we could re-orient the board each turn. 
+        - Also, how do we move objects around if we're doing this in a GUI? Sounds diffic
+
+- Collection of text-based card games (With a computer opponent(I feel like this is not as hard as it sounds))
+    - Go Fish
 
 - family feud is still an option but I'm really liking the idea of bughouse
+    - I have no idea how this works 
 
 UTILITIES: 
 - A bunch of shell scripts?
     - oh wait we're learning Java
+
 - A <physics?> homework-do'er
     - so basically, "enter your values here", with the formulas already entered?
 
+- My mom wants me to make a bee app (she is a beekeeper)
+    FOR EACH DAY THAT ONE VISITS HER HIVE:
+    - each box has 8 2-sided frames
+    - for each frame you want to be able to check off:
+        - has eggs
+        - has pollen
+        - has small larvae
+        - has large larvae
+            - has "capped brood"
+        - has honey (capped/uncapped)
+    - area for additional comments, ie:
+        - queen cell
+        - queen sighting
+        - small hive beetle sighting
+        - wax moth
+        - has drone cells
+        - activity level
+        - visitors (human)
+    - Dropboard (for checking for mites)
+        - how many mites
+        - graph
+    - Feeder
+        - ON/OFF
+        - how much added
+        - auto calculates how much has been drunken
+    - "Do next time" with reminders
+    - Questions tab
+    - Photo
+    - Weather
+        - overcast?
+        - warm? >> Bearding?
+        - etc
+    - Honey yield
+        
 MUSIC:
 - Another drum machine
     - this time with additive synthesis & ADSR Envelope Generator!
+
 - Music-Maker
 - 
