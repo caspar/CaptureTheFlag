@@ -13,11 +13,14 @@ GAMES:
     - we could include a chat bar
     - option to make the match/matches timed
     - log of moves made
-    - 
+    * I don't reeeallly  want to do this because I'm not that into chess, and kinda stole the idea from Aaron
+        - also it would involve something called "Network Architecture" - I learned this term today
+
 - family feud is still an option but I'm really liking the idea of bughouse
 
 UTILITIES: 
 - A bunch of shell scripts?
+    - oh wait we're learning Java
 - A <physics?> homework-do'er
     - so basically, "enter your values here", with the formulas already entered?
 
