@@ -8,28 +8,22 @@ import java.awt.event.*;
 
 public class Gui extends JFrame {
  
-    Game Ga = new Game();
+    Game Game = new Game();
     
-    private Container pane;
-    private JButton exitButton,b;
-    private JLabel l;
-    private JTextField text;
-    private JPanel canvas;
-    private Container buttons;
-    private JCheckBox box;
+    ImageIcon flag = new ImageIcon("Images/Cuba.png", "blahblahblah");
     
-    public void hello() {
-	System.out.println("HEllo");
-    }
 
+    private Container pane;
+    private JLabel label;
     
     public Gui() {
 	setTitle("Flag Game");
 	setSize(1280, 800); //should be fullscreen
 	setLocation(100,100);
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	pane = this.getContentPane();
+	//pane = this.getContentPane();
 
+	label = new JLabel(flag);
     }
 
 

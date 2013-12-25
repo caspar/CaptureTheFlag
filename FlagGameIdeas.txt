@@ -1,0 +1,6 @@
+FLAG GAME IDEAS:
+
+Features:
+
+
+Implementation:
