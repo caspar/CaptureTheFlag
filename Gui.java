@@ -24,6 +24,8 @@ public class Gui extends JFrame {
 	//pane = this.getContentPane();
 
 	label = new JLabel(flag);
+
+	this.update(this.getGraphics());
     }
 
 
