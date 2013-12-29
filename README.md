@@ -15,3 +15,9 @@
         - NATO
         - European Union
         - Axis vs Allies
+- Statistics and Analyitics
+    - We need to be able to create "save files"
+    - Color of flag that you're most succeesful with
+    - Time of day when you perform the best
+    - Are you a racist?
+    - Et cetera
