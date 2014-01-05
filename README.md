@@ -25,4 +25,16 @@
 
 What needs to be added:
 
-• Driver
+- A setup method
+- The actual game functionality
+    - Basic functionality
+    - Different modes of gameplay
+    - Statistics and analytics
+- A way to associate each flag with its predominant color, national language, etc. (also for analytics)
+   - Maybe multi-dimentional arrayLists?
+
+What we're finished with:
+
+- Loading the image?
+- List of countries and countries by region
+- Images of the flags
