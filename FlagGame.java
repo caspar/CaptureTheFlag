@@ -12,7 +12,8 @@ public class FlagGame {
     //any ideas? - C
 
     public static void main(String[] args){
-	Gui Gui = new Gui();
-	Gui.setVisible(true);
+	Gui G = new Gui();
+	G.setVisible(true);
+
     }
 }
