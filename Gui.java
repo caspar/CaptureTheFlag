@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class Gui extends JFrame {
  
     Game Game = new Game();
+    Random Rand = new Random();
     
     private String imagePath = "Images/";
 
@@ -16,32 +17,47 @@ public class Gui extends JFrame {
     private JLabel label;
     private JPanel flagpanel;
 
-    public ArrayList<String> flagList = new ArrayList<String>();
-    
+   
     public Gui() {
 	setTitle("Flag Game");
-	setSize(1280, 800); //should be fullscreen
+	setSize(1280, 800); //should be fullscreen (1280, 800)
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 	pane = this.getContentPane();
 
 	readDir();
-	
-	label = new JLabel(createImageIcon(imagePath + "Germany.png", "Germany"));
-
-	pane.add(label);
-
+	//	pane.add(newImage());
+	newImage();
 	this.update(this.getGraphics());
+
     }
 
-    public void newImage(){
+    public JLabel newImage(){
+	String newFlag = (Game.flagList).get(Rand.nextInt(223));
+	//System.out.println(newFlag);
+	//getName(newFlag);
 	
+       	label = new JLabel(createImageIcon(imagePath + newFlag, "Germany"));
+	pane.add(label);
+	this.update(this.getGraphics());
 
+	return label;
     }
     
-    public void readDir(){
-	String path = "./Images/"; 
-	
+    public String getName(String input){
+	String output = "";
+	for (int i = 0; i < input.length() - 4; i ++){
+	    if ((input.charAt(i)) == '_')
+		output += " ";
+	    else
+		output += input.charAt(i);
+	}
+	System.out.println(output);
+	return output;
+    }
+    
+    public void readDir(){ //Cite source (not mine)
+	String path = "./Images/"; 	
 	String files;
 	File folder = new File(path);
 	File[] listOfFiles = folder.listFiles(); 
@@ -54,11 +70,11 @@ public class Gui extends JFrame {
 			files = listOfFiles[i].getName();
 			if (files.endsWith(".png"))
 			    {
-				flagList.add(files);
+				Game.flagList.add(files);
 			    }
 		    }
 	    }
-	System.out.println(flagList);
+	//System.out.println(Game.flagList);
 
     }
     
