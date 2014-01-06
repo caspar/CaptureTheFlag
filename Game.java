@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Game {
+    //This class is gonna deal mostly with analytics
+
 
     ///ARRAY LISTS////////
     public ArrayList<String> flagList = new ArrayList<String>(); 
@@ -23,9 +25,18 @@ public class Game {
 
     public Game(){
 	//setup method
-	
     }
 
+    // public void longestCountry(){
+    // 	int longest;
+    // 	for (int i = 0; i < flagList.length; i ++){
+    // 	    if ((flagList.get(i)).length() > longest)
+    // 		longest = flagList.get(i);
+    // 	}
+    // 	System.out.println(longest);
 
+    // }
+
+ 
 
 }
