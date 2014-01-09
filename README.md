@@ -27,7 +27,7 @@
 
 What needs to be added:
 
-- A main menu. Alex? -Caspar
+- A main menu. Andrew? -Caspar
 - A setup method
     - check out newImage(). We would call this each time a button is pressed. -Caspar
 - The actual game functionality
