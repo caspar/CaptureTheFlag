@@ -11,7 +11,8 @@ import java.awt.event.*;
 
 public class Game {
     //This class is gonna deal mostly with analytics
-
+    
+    public int score = 0;
 
     ///ARRAY LISTS////////
     public ArrayList<String> flagList = new ArrayList<String>(); 
@@ -27,15 +28,13 @@ public class Game {
 	//setup method
     }
 
-    // public void longestCountry(){
-    // 	int longest;
-    // 	for (int i = 0; i < flagList.length; i ++){
-    // 	    if ((flagList.get(i)).length() > longest)
-    // 		longest = flagList.get(i);
-    // 	}
-    // 	System.out.println(longest);
+    // We could have the different gameplaymodes down here::::
 
-    // }
+    public timedGame(String mode, int time){
+	while (time > 0){
+	    time --
+	}
+    }
 
  
 
