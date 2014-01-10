@@ -58,13 +58,26 @@ public class Gui  extends JFrame implements ActionListener {
 	return flagLabel;
     }
     
-    private void newButtons(String correctName){ //CASPAR 
+    private void newButtons(String correctName){ //SPENCER
 	//must create 4 unique buttons below flag, one of which is correct.
 	//the correct answer should not be in the same place every time. 
 	//must be large enough to accomodate large country names (36 characters) --> so 40's good
 	//should call getName() in each button init.
 	//Like so:
-	//button1 = getName(Game.flagList).get(Rand.nextInt(233));
+	JButton button1 = getName(Game.flagList).get(Rand.nextInt(233));
+	JButton button2 = getName(Game.flaglist).get(Rand.nextInt(233));
+	JButton button3 = getName(Game.flaglist).get(Rand.nextInt(233));
+	JButton button4 = getName(Game.flaglist).get(Rand.nextInt(233));
+	JButton[] buttons = new JButton(4);  // array of buttons
+	buttons[0] = new JButton("");
+	buttons[1] = new JButton("");
+	buttons[2] = new JButton("");
+	buttons[3] = new JButton("");
+	Random r = new Random(4);
+	String rand = r.getName(Game.flagList).get(Rand.nextInt(233));
+	buttons[rand] = buttons[rand].setText("" + "Whatever the path is.");
+	// I think this does the trick
+	
     }
     
     public int longestCountry(){ //CASPAR
