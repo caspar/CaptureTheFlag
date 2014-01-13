@@ -19,8 +19,9 @@ public class FlagGame {
 
 
     public static void main(String[] args){
-	Gui G = new Gui();
-	G.setVisible(true);
+	MenuGui g = new MenuGui();
+	//Gui G = new Gui();
+	//G.setVisible(true);
 
     }
 }
