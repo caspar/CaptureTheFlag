@@ -74,13 +74,13 @@ public class Gui  extends JFrame implements ActionListener {
     
     public void assignAnswersToButtons(String[] answers) {
         
-        int r = new Random (4) // the index of the button to be given the correct answer
+        int r = new Random (4); // the index of the button to be given the correct answer
 
 	for (int i = 0; i < 4; i++) {
             buttonAnswers[i].setText(answers[i] + getName(Game.flagList).get(Rand.nextInt(233))); // assigns random country
         }    
 
-        JButton correctAnswer = answers[r] // reassigns the correct answer to the random button
+        JButton correctAnswer = answers[r]; // reassigns the correct answer to the random button
         
         
         frame.setSize(1280, 800);
