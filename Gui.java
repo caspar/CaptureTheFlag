@@ -3,8 +3,8 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
-//Caspar Lant
+import java.awt.image.*;
+import javax.imageio.*;
 
 public class Gui  extends JFrame implements ActionListener {
  
@@ -57,28 +57,82 @@ public class Gui  extends JFrame implements ActionListener {
 	this.update(this.getGraphics());
 	return flagLabel;
     }
+       
     
-    private void newButtons(String correctName){ //SPENCER
+    private void buttonAnswers() {  // creates the buttons
+    
+        String[] abcd = {"A","B","C","D"};
+        answers = new JButton[4];
+        
+        // {"" "" "" ""}
+        
+        for (int i = 0; i < 4; i++) {
+            answers[i] = new JButton(abcd[i]); // {A B C D}
+            answers[i].addActionListener(this);
+        }
+    }
+    
+    public void assignAnswersToButtons(String[] answers) {
+        
+        int r = new Random (4) // the index of the button to be given the correct answer
+
+	for (int i = 0; i < 4; i++) {
+            buttonAnswers[i].setText(answers[i] + getName(Game.flagList).get(Rand.nextInt(233))); // assigns random country
+        }    
+
+        JButton correctAnswer = answers[r] // reassigns the correct answer to the random button
+        
+        
+        frame.setSize(1280, 800);
+        frame.setBackground(new Color(30,30,30));
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setVisible(true);
+        
+    }
+
+
+    
+    /* private void newButtons(String correctName){ //SPENCER
 	//must create 4 unique buttons below flag, one of which is correct.
 	//the correct answer should not be in the same place every time. 
 	//must be large enough to accomodate large country names (36 characters) --> so 40's good
 	//should call getName() in each button init.
 	//Like so:
-	JButton button1 = getName(Game.flagList).get(Rand.nextInt(233));
-	JButton button2 = getName(Game.flaglist).get(Rand.nextInt(233));
-	JButton button3 = getName(Game.flaglist).get(Rand.nextInt(233));
-	JButton button4 = getName(Game.flaglist).get(Rand.nextInt(233));
+	
+	frame = new JFrame("Flag Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new MenuLayout());
+	
+	String button1 = getName(Game.flagList).get(Rand.nextInt(233)));
+	String button2 = getName(Game.flagList).get(Rand.nextInt(233)));
+	String button3 = getName(Game.flagList).get(Rand.nextInt(233)));
+	String button4 = getName(Game.flagList).get(Rand.nextInt(233)))
 	JButton[] buttons = new JButton(4);  // array of buttons
-	buttons[0] = new JButton("");
+	buttons[0] = new JButton(""); // the following adds four blank buttons into it
 	buttons[1] = new JButton("");
 	buttons[2] = new JButton("");
 	buttons[3] = new JButton("");
-	Random r = new Random(4);
-	String rand = r.getName(Game.flagList).get(Rand.nextInt(233));
-	buttons[rand] = buttons[rand].setText("" + "Whatever the path is.");
-	// I think this does the trick
+	Random r = new Random(4); 
+	buttons[r] = 
+	//String rand = r.getName(Game.flagList).get(Rand.nextInt(233));
+	//buttons[rand] = buttons[rand].setText("" + "Whatever the path is.");
+	// This didn't do the trick at all lol
+	
+	button1.addActionListener(this);
+        button2.addActionListener(this);
+        button3.addActionListener(this);
+        button4.addActionListener(this);
+
+        frame.getContentPane().add(button1);
+        frame.getContentPane().add(button2);
+        frame.getContentPane().add(button3);
+        frame.getContentPane().add(button4);
+
+
 	
     }
+    */
+    
     
     public int longestCountry(){ //CASPAR
 	int longest = 0;
