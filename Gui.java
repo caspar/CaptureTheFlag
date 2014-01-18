@@ -6,7 +6,11 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
+<<<<<<< HEAD
 public class Gui  extends JFrame implements ActionListener {
+=======
+public class Gui extends JFrame {
+>>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
  
     Game Game = new Game();
     Random Rand = new Random();
@@ -20,6 +24,7 @@ public class Gui  extends JFrame implements ActionListener {
     private JLabel countryNameLabel;
     private JPanel flagpanel;
 
+<<<<<<< HEAD
     ///// For newButtons() /////
     private JButton button1;
     private JButton button2;
@@ -28,6 +33,21 @@ public class Gui  extends JFrame implements ActionListener {
 
     
     public Gui() { //CASPAR
+=======
+    private String[] abcd = {"A. ","B. ","C. ","D. "};
+    private String b1 = abcd[0];
+    private String b2 = abcd[1];
+    private String b3 = abcd[2];
+    private String b4 = abcd[3];
+    private String[] choices = {b1, b2, b3, b4};
+    JButton button1 = new JButton(b1);
+    JButton button2 = new JButton(b2);
+    JButton button3 = new JButton(b3);
+    JButton button4 = new JButton(b4);
+    private JButton[] answers = {button1, button2, button3, button4};
+   
+    public Gui() {
+>>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
 	setTitle("Flag Game");
 	setSize(700, 400); //should be fullscreen (1280, 800)
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -175,7 +195,27 @@ public class Gui  extends JFrame implements ActionListener {
 		    }
 	    }
     }
+<<<<<<< HEAD
        
+=======
+    
+    public void assignAnswersToButtons(String[] answers) {
+        
+        Random rand = new Random();
+	int r = rand.nextInt(4); // the index of the button to be given the correct answer
+
+        for (int i = 0; i < 4; i++) {
+            choices [i] += getName((Game.flagList).get(Rand.nextInt(233))); // assigns random country to the buttons
+            answers[i] = choices[i];
+        }
+
+        choices[r] = abcd[r] + "path of answer"; // reassigns the correct answer to the random button
+        answers[r] = choices[r];
+    }
+
+    
+    
+>>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
     protected ImageIcon createImageIcon(String path, String description) {
         java.net.URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
