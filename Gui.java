@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//Caspar Lant
-
 public class Gui extends JFrame {
  
     Game Game = new Game();
@@ -23,10 +21,10 @@ public class Gui extends JFrame {
     private String b3 = abcd[2];
     private String b4 = abcd[3];
     private String[] choices = {b1, b2, b3, b4};
-    button1 = new JButton(b1);
-    button2 = new JButton(b2);
-    button3 = new JButton(b3);
-    button4 = new JButton(b4);
+    JButton button1 = new JButton(b1);
+    JButton button2 = new JButton(b2);
+    JButton button3 = new JButton(b3);
+    JButton button4 = new JButton(b4);
     private JButton[] answers = {button1, button2, button3, button4};
    
     public Gui() {
@@ -91,15 +89,16 @@ public class Gui extends JFrame {
     
     public void assignAnswersToButtons(String[] answers) {
         
-        int r = new Random (4) // the index of the button to be given the correct answer
+        Random rand = new Random();
+	int r = rand.nextInt(4); // the index of the button to be given the correct answer
 
         for (int i = 0; i < 4; i++) {
-            choices [i] += (Game.flagList).get(Rand.nextInt(233))); // assigns random country to the buttons
+            choices [i] += getName((Game.flagList).get(Rand.nextInt(233))); // assigns random country to the buttons
             answers[i] = choices[i];
         }
 
         choices[r] = abcd[r] + "path of answer"; // reassigns the correct answer to the random button
-        answers[r] = choices[r]
+        answers[r] = choices[r];
     }
 
     
