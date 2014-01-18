@@ -17,6 +17,17 @@ public class Gui extends JFrame {
     private JLabel label;
     private JPanel flagpanel;
 
+    private String[] abcd = {"A. ","B. ","C. ","D. "};
+    private String b1 = abcd[0];
+    private String b2 = abcd[1];
+    private String b3 = abcd[2];
+    private String b4 = abcd[3];
+    private String[] choices = {b1, b2, b3, b4};
+    button1 = new JButton(b1);
+    button2 = new JButton(b2);
+    button3 = new JButton(b3);
+    button4 = new JButton(b4);
+    private JButton[] answers = {button1, button2, button3, button4};
    
     public Gui() {
 	setTitle("Flag Game");
@@ -78,7 +89,19 @@ public class Gui extends JFrame {
 
     }
     
-   
+    public void assignAnswersToButtons(String[] answers) {
+        
+        int r = new Random (4) // the index of the button to be given the correct answer
+
+        for (int i = 0; i < 4; i++) {
+            choices [i] += (Game.flagList).get(Rand.nextInt(233))); // assigns random country to the buttons
+            answers[i] = choices[i];
+        }
+
+        choices[r] = abcd[r] + "path of answer"; // reassigns the correct answer to the random button
+        answers[r] = choices[r]
+    }
+
     
     
     protected ImageIcon createImageIcon(String path, String description) {
