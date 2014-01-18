@@ -30,9 +30,9 @@ public class Game {
 
     // We could have the different gameplaymodes down here::::
 
-    public timedGame(String mode, int time){
+    public void  timedGame(String mode, int time){
 	while (time > 0){
-	    time --
+	    time --;
 	}
     }
 
