@@ -72,10 +72,6 @@ public class GameGui implements ActionListener {
 	frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-	GameGui g = new GameGui();
-    }
-
     private void getNames() { //Partially Caspar's	
 	File folder = new File("Images/");
 	File[] images = folder.listFiles(); 
