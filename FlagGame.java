@@ -21,6 +21,7 @@ public class FlagGame {
     public static void main(String[] args){
 	//MenuGui MG = new MenuGui();
 	GameGui GG = new GameGui();
+	//MenuLayout ML = new MenuLayout();
 	//Gui G = new Gui();
 	//G.setVisible(true);
     }

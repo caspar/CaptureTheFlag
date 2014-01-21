@@ -14,6 +14,7 @@ public class GameGui implements ActionListener {
     private Random r;
     private String[] names;
     private Dimension flagD;
+    public String currentFlag;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -27,15 +28,39 @@ public class GameGui implements ActionListener {
 	    return null;
 	}
     }
-
+       
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == c[0]) {
+	    if ((c[0].toString()).contains(currentFlag))
+		System.out.println("Correct!");
+	    else
+		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().removeAll();
+	    init();
 	}
 	else if (e.getSource() == c[1]) {
+	    if ((c[1].toString()).contains(currentFlag))
+		System.out.println("Correct!");
+	    else
+		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().removeAll();
+	    init();
 	}
 	else if (e.getSource() == c[2]) {
+	    if ((c[2].toString()).contains(currentFlag))
+		System.out.println("Correct!");
+	    else
+		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().removeAll();
+	    init();
 	}
 	else if (e.getSource() == c[3]) {
+	    if ((c[3].toString()).contains(currentFlag))
+		System.out.println("Correct!");
+	    else
+		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().removeAll();
+	    init();
 	}
 	else if (e.getSource() == quit) {
 	    frame.getContentPane().removeAll();
@@ -103,7 +128,7 @@ public class GameGui implements ActionListener {
 		}
 	    }
 
-	    c[i] = new JButton(choices[i].substring(7).replace(".png","").replace("_"," "));
+	    c[i] = new JButton(readName(choices[i].substring(7)));
 	    if (choices[i].length() > 35) //Accounts for really long country names
 		c[i].setFont(new Font("Serif", Font.PLAIN, 10));
 	    else if (choices[i].length() > 30)
@@ -114,5 +139,19 @@ public class GameGui implements ActionListener {
         }
 
 	flag = labelImage(choices[x]);
+	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
     }
+    
+    private String readName (String in) {
+	return in.replace("Images/","").replace(".png","").replace("_"," ");
+    }
+    
+    public void correct(){ //inspired by an excerpt in "Java Swing" --> http://www.dickyho.net/ebook/IT/JavaSwing2ndEdition.pdf
+	ImageIcon icon = new ImageIcon("Images/correct.gif"); //Animated gif
+    }
+
+    public void incorrect(){
+	ImageIcon icon = new ImageIcon("Images/incorrect.gif"); //Animated gif
+    }
+    
 }
