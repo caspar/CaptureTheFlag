@@ -1,0 +1,9 @@
+This will be what we store the stats in
+
+numbers and whatnot will go in here
+
+countries by color, are you racist (are we actually making this a thing),
+percentage correct/incorrect, etc.
+
+will be read by the java file
+
