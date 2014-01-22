@@ -30,7 +30,10 @@ public class GameGui implements ActionListener {
 	}
     }
        
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { //This determines whether your answer is correct.
+	//some helper functions from Stats.java
+	//SG.saveStats(); -- writes any changes to stats.txt
+	//SG.getStats(); -- reads stats.txt (or we could have a boolean array)
 	if (e.getSource() == c[0]) {
 	    if ((c[0].toString()).contains(currentFlag))
 		System.out.println("Correct!");

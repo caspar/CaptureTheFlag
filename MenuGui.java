@@ -88,6 +88,6 @@ public class MenuGui implements ActionListener {
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
 	frame.setMinimumSize(new Dimension(800, 600));
-	frame.setVisible(true);
+	frame.setVisiblamae(true);
     }
 }
