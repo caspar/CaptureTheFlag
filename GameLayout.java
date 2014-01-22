@@ -5,6 +5,7 @@ public class GameLayout implements LayoutManager {
     }
 
     public void removeLayoutComponent(Component comp) {
+	comp.setBounds(0,0,0,0);
     }
 
     public Dimension minimumLayoutSize(Container parent) {

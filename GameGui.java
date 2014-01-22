@@ -8,13 +8,14 @@ import javax.imageio.*;
 
 public class GameGui implements ActionListener {
     private JFrame frame;
+    private Container content;
     private JLabel flag;
     private JButton[] c;
     private JButton quit;
     private Random r;
     private String[] names;
     private Dimension flagD;
-    public String currentFlag;
+    private String currentFlag;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -35,6 +36,7 @@ public class GameGui implements ActionListener {
 		System.out.println("Correct!");
 	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
@@ -43,6 +45,7 @@ public class GameGui implements ActionListener {
 		System.out.println("Correct!");
 	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
@@ -51,6 +54,7 @@ public class GameGui implements ActionListener {
 		System.out.println("Correct!");
 	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
@@ -59,12 +63,14 @@ public class GameGui implements ActionListener {
 		System.out.println("Correct!");
 	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == quit) {
-	    frame.getContentPane().removeAll();
-	    init();
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	    frame.getContentPane().remove(0);
+	    frame.setVisible(true);
 	}
     }
 
@@ -75,10 +81,12 @@ public class GameGui implements ActionListener {
 
     private void init() {
 	r = new Random();
+	content = new Container();
 	getNames();
 	assignButtons();
 	flag.setSize(flagD);
 
+	frame.setContentPane(content);
 	frame.getContentPane().setLayout(new GameLayout());
 	frame.getContentPane().add(flag);
 
@@ -97,19 +105,22 @@ public class GameGui implements ActionListener {
 	frame.setVisible(true);
     }
 
-    private void getNames() { //Partially Caspar's	
+    private void getNames() { //Mainly Caspar's Code	
 	File folder = new File("Images/");
 	File[] images = folder.listFiles(); 
-	names = new String[images.length];
+	names = new String[images.length-2]; //Ignoring title.png and README.md
+	int counter = 0; //Accounts for when skipping over unwanted files
 	
-	for (int i = 0; i < images.length; i++) 
+	for (int i = 0; i < names.length; i++, counter++) 
 	    {
-		if (images[i].getName().endsWith(".png"))
-		    names[i] = images[i].toString();
-	    }
+		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
+		    counter++;
+
+		names[i] = images[counter].toString();
+	    };
     }
 
-    private void assignButtons() { //Partially Spencer's
+    private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
 	boolean valid;
 	c = new JButton[4];
@@ -153,5 +164,4 @@ public class GameGui implements ActionListener {
     public void incorrect(){
 	ImageIcon icon = new ImageIcon("Images/incorrect.gif"); //Animated gif
     }
-    
 }
