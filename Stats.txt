@@ -1,9 +1,10 @@
-This will be what we store the stats in
+To clear up what will go in here:
 
-numbers and whatnot will go in here
+• Basic stats
+  ° % right and wrong
+  ° best in a row
+  ° are you racist?
+  ° etc.
 
-countries by color, are you racist (are we actually making this a thing),
-percentage correct/incorrect, etc.
 
 will be read by the java file
-
