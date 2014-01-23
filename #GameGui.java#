@@ -8,14 +8,14 @@ import javax.imageio.*;
 
 public class GameGui implements ActionListener {
     private JFrame frame;
+    private Container content;
     private JLabel flag;
     private JButton[] c;
     private JButton quit;
     private Random r;
     private String[] names;
     private Dimension flagD;
-    public String currentFlag;
-    public int score = 0;
+    private String currentFlag;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -30,46 +30,50 @@ public class GameGui implements ActionListener {
 	}
     }
        
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { //This determines whether your answer is correct.
+	//some helper functions from Stats.java
+	//SG.saveStats(); -- writes any changes to stats.txt
+	//SG.getStats(); -- reads stats.txt (or we could have a boolean array)
 	if (e.getSource() == c[0]) {
-	    if ((c[0].toString()).contains(currentFlag)){
-		score ++;
+	    if ((c[0].toString()).contains(currentFlag))
 		System.out.println("Correct!");
-	    } else
+	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[1]) {
-	    if ((c[1].toString()).contains(currentFlag)){
-		score ++;
+	    if ((c[1].toString()).contains(currentFlag))
 		System.out.println("Correct!");
-	    } else
+	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[2]) {
-	    if ((c[2].toString()).contains(currentFlag)){
-		score ++;
+	    if ((c[2].toString()).contains(currentFlag))
 		System.out.println("Correct!");
-	    } else
+	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[3]) {
-	    if ((c[3].toString()).contains(currentFlag)){
-		score ++;
+	    if ((c[3].toString()).contains(currentFlag))
 		System.out.println("Correct!");
-	    } else
+	    else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == quit) {
-	    frame.getContentPane().removeAll();
-	    init();
+	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	    frame.getContentPane().remove(0);
+	    frame.setVisible(true);
 	}
     }
 
@@ -80,10 +84,12 @@ public class GameGui implements ActionListener {
 
     private void init() {
 	r = new Random();
+	content = new Container();
 	getNames();
 	assignButtons();
 	flag.setSize(flagD);
 
+	frame.setContentPane(content);
 	frame.getContentPane().setLayout(new GameLayout());
 	frame.getContentPane().add(flag);
 
@@ -102,19 +108,22 @@ public class GameGui implements ActionListener {
 	frame.setVisible(true);
     }
 
-    private void getNames() { //Partially Caspar's	
+    private void getNames() { //Mainly Caspar's Code	
 	File folder = new File("Images/");
 	File[] images = folder.listFiles(); 
-	names = new String[images.length];
+	names = new String[images.length-2]; //Ignoring title.png and README.md
+	int counter = 0; //Accounts for when skipping over unwanted files
 	
-	for (int i = 0; i < images.length; i++) 
+	for (int i = 0; i < names.length; i++, counter++) 
 	    {
-		if (images[i].getName().endsWith(".png"))
-		    names[i] = images[i].toString();
-	    }
+		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
+		    counter++;
+
+		names[i] = images[counter].toString();
+	    };
     }
 
-    private void assignButtons() { //Partially Spencer's
+    private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
 	boolean valid;
 	c = new JButton[4];
@@ -140,14 +149,11 @@ public class GameGui implements ActionListener {
 		c[i].setFont(new Font("Serif", Font.PLAIN, 12));
 	    else if (choices[i].length() > 15)
 		c[i].setFont(new Font("Serif", Font.PLAIN, 15));
-	}
+			     
+        }
 
 	flag = labelImage(choices[x]);
 	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
-    
-	//test:
-	c[1].setBackground(RED);
-	
     }
     
     private String readName (String in) {
@@ -161,5 +167,4 @@ public class GameGui implements ActionListener {
     public void incorrect(){
 	ImageIcon icon = new ImageIcon("Images/incorrect.gif"); //Animated gif
     }
-    
 }

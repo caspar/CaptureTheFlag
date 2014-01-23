@@ -139,7 +139,7 @@ Macau SAR China
 Malaysia
 Maldives
 Mongolia
-Myanmar [Burma]
+Myanmar (Burma)
 Nepal
 Neutral Zone
 North Korea
@@ -228,7 +228,7 @@ Australia
 Bouvet Island
 British Indian Ocean Territory
 Christmas Island
-Cocos [Keeling] Islands
+Cocos (Keeling) Islands
 Cook Islands
 Fiji
 French Polynesia
