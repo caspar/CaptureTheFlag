@@ -15,6 +15,7 @@ public class GameGui implements ActionListener {
     private String[] names;
     private Dimension flagD;
     public String currentFlag;
+    public int score = 0;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -31,33 +32,37 @@ public class GameGui implements ActionListener {
        
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == c[0]) {
-	    if ((c[0].toString()).contains(currentFlag))
+	    if ((c[0].toString()).contains(currentFlag)){
+		score ++;
 		System.out.println("Correct!");
-	    else
+	    } else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[1]) {
-	    if ((c[1].toString()).contains(currentFlag))
+	    if ((c[1].toString()).contains(currentFlag)){
+		score ++;
 		System.out.println("Correct!");
-	    else
+	    } else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[2]) {
-	    if ((c[2].toString()).contains(currentFlag))
+	    if ((c[2].toString()).contains(currentFlag)){
+		score ++;
 		System.out.println("Correct!");
-	    else
+	    } else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
 	else if (e.getSource() == c[3]) {
-	    if ((c[3].toString()).contains(currentFlag))
+	    if ((c[3].toString()).contains(currentFlag)){
+		score ++;
 		System.out.println("Correct!");
-	    else
+	    } else
 		System.out.println("Incorrect. The correct choice was " + currentFlag);
 	    frame.getContentPane().removeAll();
 	    init();
@@ -135,11 +140,14 @@ public class GameGui implements ActionListener {
 		c[i].setFont(new Font("Serif", Font.PLAIN, 12));
 	    else if (choices[i].length() > 15)
 		c[i].setFont(new Font("Serif", Font.PLAIN, 15));
-			     
-        }
+	}
 
 	flag = labelImage(choices[x]);
 	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
+    
+	//test:
+	c[1].setBackground(RED);
+	
     }
     
     private String readName (String in) {
