@@ -159,7 +159,7 @@ public class Gui extends JFrame {
 
         choices[r] = abcd[r] + "path of answer"; // reassigns the correct answer to the random button
         answers[r] = choices[r];
-    }
+}
 
     
     
