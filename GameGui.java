@@ -52,14 +52,18 @@ public class GameGui implements ActionListener {
 	    c[x].setBorderPainted(false);
 	    if (clicked == x){
 		score ++;
+		System.out.println("Correct!");
 	    }
 	    else {
-		System.out.println(e.getSource());
+		System.out.println("Incorrect. The correct answer was " + currentFlag);
+		//System.out.println(e.getSource());
 		c[clicked].setBackground(Color.RED);
 		c[clicked].setOpaque(true);
 		c[clicked].setBorderPainted(false);
 	    }
-	    holdUp(); //Problem: this seems to happen before the buttons have time to change color. Any ideas? - Caspar
+	    
+	    
+	    //holdUp(); //Problem: this seems to happen before the buttons have time to change color. Any ideas? - Caspar
 	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
@@ -187,7 +191,7 @@ public class GameGui implements ActionListener {
 
 	flag = labelImage(choices[x]);
 	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
-	System.out.println(c[1]);
+	//System.out.println(c[1]);
 	
     }
     
@@ -205,7 +209,8 @@ public class GameGui implements ActionListener {
     
     public void holdUp(){ //Caspar
 	try{
-	    TimeUnit.SECONDS.sleep(2);
+	    Thread.sleep(200);
+	    //TimeUnit.SECONDS.sleep(2);
 	}
 	catch (Exception e){
 	    System.out.println(e);
