@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.util.concurrent.TimeUnit;
 
 public class GameGui implements ActionListener {
     private JFrame frame;
@@ -15,12 +16,9 @@ public class GameGui implements ActionListener {
     private Random r;
     private String[] names;
     private Dimension flagD;
-<<<<<<< HEAD
     public String currentFlag;
     public int score = 0;
-=======
-    private String currentFlag;
->>>>>>> 5d79311385e4733987b7d459b40c336727a5034a
+    public int x = 0; //Determines which button is correct
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -35,52 +33,82 @@ public class GameGui implements ActionListener {
 	}
     }
        
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == c[0]) {
-	    if ((c[0].toString()).contains(currentFlag)){
-		score ++;
-		System.out.println("Correct!");
-	    } else
-		System.out.println("Incorrect. The correct choice was " + currentFlag);
+    public void actionPerformed(ActionEvent e) { //Caspar
+	if (e.getSource() == quit){
 	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
-	else if (e.getSource() == c[1]) {
-	    if ((c[1].toString()).contains(currentFlag)){
+	else {
+	    int clicked = 0;
+	    if (e.getSource() == c[1])
+		clicked = 1;
+	    if (e.getSource() == c[2])
+		clicked = 2;
+	    if (e.getSource() == c[3])
+		clicked = 3;
+	    c[x].setBackground(Color.GREEN);
+	    c[x].setOpaque(true);
+	    c[x].setBorderPainted(false);
+	    if (clicked == x){
 		score ++;
-		System.out.println("Correct!");
-	    } else
-		System.out.println("Incorrect. The correct choice was " + currentFlag);
+	    }
+	    else {
+		System.out.println(e.getSource());
+		c[clicked].setBackground(Color.RED);
+		c[clicked].setOpaque(true);
+		c[clicked].setBorderPainted(false);
+	    }
+	    holdUp(); //Problem: this seems to happen before the buttons have time to change color. Any ideas? - Caspar
 	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 	    frame.getContentPane().removeAll();
 	    init();
 	}
-	else if (e.getSource() == c[2]) {
-	    if ((c[2].toString()).contains(currentFlag)){
-		score ++;
-		System.out.println("Correct!");
-	    } else
-		System.out.println("Incorrect. The correct choice was " + currentFlag);
-	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	    frame.getContentPane().removeAll();
-	    init();
-	}
-	else if (e.getSource() == c[3]) {
-	    if ((c[3].toString()).contains(currentFlag)){
-		score ++;
-		System.out.println("Correct!");
-	    } else
-		System.out.println("Incorrect. The correct choice was " + currentFlag);
-	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	    frame.getContentPane().removeAll();
-	    init();
-	}
-	else if (e.getSource() == quit) {
-	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	    frame.getContentPane().remove(0);
-	    frame.setVisible(true);
-	}
+	// if (e.getSource() == c[0]) {
+	//     if ((c[0].toString()).contains(currentFlag)){
+	// 	score ++;
+	// 	System.out.println("Correct!");
+	//     } else
+	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
+	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	//     frame.getContentPane().removeAll();
+	//     init();
+	// }
+	// else if (e.getSource() == c[1]) {
+	//     if ((c[1].toString()).contains(currentFlag)){
+	// 	score ++;
+	// 	System.out.println("Correct!");
+	//     } else
+	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
+	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	//     frame.getContentPane().removeAll();
+	//     init();
+	// }
+	// else if (e.getSource() == c[2]) {
+	//     if ((c[2].toString()).contains(currentFlag)){
+	// 	score ++;
+	// 	System.out.println("Correct!");
+	//     } else
+	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
+	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	//     frame.getContentPane().removeAll();
+	//     init();
+	// }
+	// else if (e.getSource() == c[3]) {
+	//     if ((c[3].toString()).contains(currentFlag)){
+	// 	score ++;
+	// 	System.out.println("Correct!");
+	//     } else
+	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
+	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	//     frame.getContentPane().removeAll();
+	//     init();
+	// }
+	// else if (e.getSource() == quit) {
+	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+	//     frame.getContentPane().remove(0);
+	//     frame.setVisible(true);
+	// }
     }
 
     public GameGui() {
@@ -114,7 +142,7 @@ public class GameGui implements ActionListener {
 	frame.setVisible(true);
     }
 
-    private void getNames() { //Mainly Caspar's Code	
+    private void getNames() { //Caspar
 	File folder = new File("Images/");
 	File[] images = folder.listFiles(); 
 	names = new String[images.length-2]; //Ignoring title.png and README.md
@@ -134,7 +162,7 @@ public class GameGui implements ActionListener {
 	boolean valid;
 	c = new JButton[4];
 
-	int x = r.nextInt(4); // the index of the button to be given the correct answer
+	x = r.nextInt(4); // the index of the button to be given the correct answer
 
         for (int i = 0; i < 4; i++) {
 	    valid = false;
@@ -159,21 +187,28 @@ public class GameGui implements ActionListener {
 
 	flag = labelImage(choices[x]);
 	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
-    
-	//test:
-	c[1].setBackground(RED);
+	System.out.println(c[1]);
 	
     }
     
-    private String readName (String in) {
+    private String readName (String in) { //Caspar
 	return in.replace("Images/","").replace(".png","").replace("_"," ");
     }
-    
-    public void correct(){ //inspired by an excerpt in "Java Swing" --> http://www.dickyho.net/ebook/IT/JavaSwing2ndEdition.pdf
-	ImageIcon icon = new ImageIcon("Images/correct.gif"); //Animated gif
-    }
 
-    public void incorrect(){
-	ImageIcon icon = new ImageIcon("Images/incorrect.gif"); //Animated gif
+    public static void pause(int seconds){
+	Date start = new Date();
+	Date end = new Date();
+	while(end.getTime() - start.getTime() < seconds * 1000){
+	    end = new Date();
+	}
+    }
+    
+    public void holdUp(){ //Caspar
+	try{
+	    TimeUnit.SECONDS.sleep(2);
+	}
+	catch (Exception e){
+	    System.out.println(e);
+	}
     }
 }

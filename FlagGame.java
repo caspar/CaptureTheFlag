@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.util.concurrent.TimeUnit;
+
 
 public class FlagGame {
     private static String[] names;
@@ -24,7 +26,6 @@ public class FlagGame {
 	getNames();
 	assembleColorDict();
 	assignColors();
-	System.out.println(countryColors);
 	GameGui GG = new GameGui();
     }
 
