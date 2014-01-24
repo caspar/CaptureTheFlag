@@ -15,12 +15,8 @@ public class GameGui implements ActionListener {
     private Random r;
     private String[] names;
     private Dimension flagD;
-<<<<<<< HEAD
     public String currentFlag;
     public int score = 0;
-=======
-    private String currentFlag;
->>>>>>> 5d79311385e4733987b7d459b40c336727a5034a
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -159,21 +155,10 @@ public class GameGui implements ActionListener {
 
 	flag = labelImage(choices[x]);
 	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
-    
-	//test:
-	c[1].setBackground(RED);
 	
     }
     
     private String readName (String in) {
 	return in.replace("Images/","").replace(".png","").replace("_"," ");
-    }
-    
-    public void correct(){ //inspired by an excerpt in "Java Swing" --> http://www.dickyho.net/ebook/IT/JavaSwing2ndEdition.pdf
-	ImageIcon icon = new ImageIcon("Images/correct.gif"); //Animated gif
-    }
-
-    public void incorrect(){
-	ImageIcon icon = new ImageIcon("Images/incorrect.gif"); //Animated gif
     }
 }
