@@ -1,6 +1,16 @@
-import java.io.*;
-import java.util.*;
+import java.io.*;            // __
+import java.util.Properties; //   |
+//import java.util.Timer;      //   |
+import java.util.Scanner;    //   |-- Had to do this due to Class ambiguity problem.
+import java.util.Hashtable;  //   |
+import java.util.Date;       //   |
+import java.util.Random;     // __|
 import javax.swing.*;
+// import javax.swing.JButton;
+// import javax.swing.JLabel;
+// import javax.swing.JFrame;
+// import javax.swing.ImageIcon;
+// import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -20,6 +30,7 @@ public class GameGui implements ActionListener {
     public int score = 0;
     public int x = 0; //Determines which button is correct
 
+    
     private JLabel labelImage(String path) {
  	BufferedImage image;
 	try {
@@ -32,7 +43,7 @@ public class GameGui implements ActionListener {
 	    return null;
 	}
     }
-       
+    
     public void actionPerformed(ActionEvent e) { //Caspar
 	if (e.getSource() == quit){
 	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
@@ -56,70 +67,22 @@ public class GameGui implements ActionListener {
 	    }
 	    else {
 		System.out.println("Incorrect. The correct answer was " + currentFlag);
-		//System.out.println(e.getSource());
 		c[clicked].setBackground(Color.RED);
 		c[clicked].setOpaque(true);
 		c[clicked].setBorderPainted(false);
 	    }
-	    
-	    
-	    //holdUp(); //Problem: this seems to happen before the buttons have time to change color. Any ideas? - Caspar
-	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	    frame.getContentPane().removeAll();
-	    init();
-	}
-	// if (e.getSource() == c[0]) {
-	//     if ((c[0].toString()).contains(currentFlag)){
-	// 	score ++;
-	// 	System.out.println("Correct!");
-	//     } else
-	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
-	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	//     frame.getContentPane().removeAll();
-	//     init();
-	// }
-	// else if (e.getSource() == c[1]) {
-	//     if ((c[1].toString()).contains(currentFlag)){
-	// 	score ++;
-	// 	System.out.println("Correct!");
-	//     } else
-	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
-	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	//     frame.getContentPane().removeAll();
-	//     init();
-	// }
-	// else if (e.getSource() == c[2]) {
-	//     if ((c[2].toString()).contains(currentFlag)){
-	// 	score ++;
-	// 	System.out.println("Correct!");
-	//     } else
-	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
-	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	//     frame.getContentPane().removeAll();
-	//     init();
-	// }
-	// else if (e.getSource() == c[3]) {
-	//     if ((c[3].toString()).contains(currentFlag)){
-	// 	score ++;
-	// 	System.out.println("Correct!");
-	//     } else
-	// 	System.out.println("Incorrect. The correct choice was " + currentFlag);
-	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	//     frame.getContentPane().removeAll();
-	//     init();
-	// }
-	// else if (e.getSource() == quit) {
-	//     frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	//     frame.getContentPane().remove(0);
-	//     frame.setVisible(true);
-	// }
+	    delayedReset();
+      	}
     }
-
+    
+    
+  
+    
     public GameGui() {
 	frame = new JFrame("Flag Game");
 	init();
     }
-
+    
     private void init() {
 	r = new Random();
 	content = new Container();
@@ -186,13 +149,11 @@ public class GameGui implements ActionListener {
 	    else if (choices[i].length() > 30)
 		c[i].setFont(new Font("Serif", Font.PLAIN, 12));
 	    else if (choices[i].length() > 15)
-		c[i].setFont(new Font("Serif", Font.PLAIN, 15));
+		c[i].setFont(new Font("Serif", Font.PLAIN, 15)); //This one is not serified for some reason..
 	}
 
 	flag = labelImage(choices[x]);
-	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
-	//System.out.println(c[1]);
-	
+	currentFlag = readName(choices[x]); //not redundant, this one's a String. 	
     }
     
     private String readName (String in) { //Caspar
@@ -216,4 +177,24 @@ public class GameGui implements ActionListener {
 	    System.out.println(e);
 	}
     }
+    
+    public void delayedReset() {
+	new Thread() {
+	    public void run() {
+		try{
+		    TimeUnit.MILLISECONDS.sleep(500); //Will need a try/catch
+		    SwingUtilities.invokeLater(new Runnable() {
+			    public void run() {
+				frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
+				frame.getContentPane().removeAll();
+				init();
+			    }
+			});
+		}
+		catch(Exception except){
+		}
+	    }
+	}.start();
+    }
+    
 }
