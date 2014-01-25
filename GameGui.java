@@ -6,11 +6,6 @@ import java.util.Hashtable;  //   |
 import java.util.Date;       //   |
 import java.util.Random;     // __|
 import javax.swing.*;
-// import javax.swing.JButton;
-// import javax.swing.JLabel;
-// import javax.swing.JFrame;
-// import javax.swing.ImageIcon;
-// import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -21,6 +16,7 @@ public class GameGui implements ActionListener {
     private JFrame frame;
     private Container content;
     private JLabel flag;
+    private JLabel scoreLabel;
     private JButton[] c;
     private JButton quit;
     private Random r;
@@ -80,6 +76,7 @@ public class GameGui implements ActionListener {
     
     public GameGui() {
 	frame = new JFrame("Flag Game");
+		
 	init();
     }
     
@@ -99,14 +96,23 @@ public class GameGui implements ActionListener {
 	    frame.getContentPane().add(c[i]);
 	}
 
-	quit = new JButton("Quit");
-	quit.addActionListener(this);
-	frame.getContentPane().add(quit);
+	//quit = new JButton("Quit");
+	//quit.addActionListener(this);
+	//frame.getContentPane().add(quit);
+	
+	scoreLabel = new JLabel("Score: " + score);
+	scoreLabel.setForeground(Color.white);
+	frame.getContentPane().add(scoreLabel);
 
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
 	frame.setMinimumSize(new Dimension(800, 600));
 	frame.setVisible(true);
+	frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+
+
+
+
     }
 
     private void getNames() { //Caspar
