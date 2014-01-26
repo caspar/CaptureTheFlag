@@ -58,10 +58,12 @@ public class GameGui implements ActionListener {
 	    c[x].setOpaque(true);
 	    c[x].setBorderPainted(false);
 	    if (clicked == x){
-		score ++;
+		updateBasicStats(true);
 		System.out.println("Correct!");
 	    }
 	    else {
+	    	updateBasicStats(false);
+	    	updateSpecificStats(false, )
 		System.out.println("Incorrect. The correct answer was " + currentFlag);
 		c[clicked].setBackground(Color.RED);
 		c[clicked].setOpaque(true);
@@ -103,6 +105,14 @@ public class GameGui implements ActionListener {
 	scoreLabel = new JLabel("Score: " + score);
 	scoreLabel.setForeground(Color.white);
 	frame.getContentPane().add(scoreLabel);
+	
+	runLabel = new JLabel("Current run: " + currentStreak);
+        runLabel.setForeground(Color.white);
+        frame.getContentPane().add(runLabel);
+        
+        bestLabel = new JLabel("Best run: " + longestStreak);
+        bestLabel.setForeground(Color.white);
+        frame.getContentPane().add(bestLabel);
 
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
@@ -129,6 +139,24 @@ public class GameGui implements ActionListener {
 		names[i] = images[counter].toString();
 	    };
     }
+    
+    /*private void getContinent() {
+	File folder = new File("Images/");
+	File[] images = folder.listFiles(); 
+	names = new String[images.length-2]; //Ignoring title.png and README.md
+	int counter = 0; //Accounts for when skipping over unwanted files
+	
+	for (int i = 0; i < names.length; i++, counter++) 
+	    {
+		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
+		    counter++;
+
+		names[i] = images[counter].toString();
+	    };
+    }
+    }
+
+    */
 
     private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
