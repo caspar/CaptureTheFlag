@@ -142,7 +142,7 @@ public class GameGui implements ActionListener {
     
     // the following gets the continent of the current country
     
-    //private void getContinent() { // Spencer
+    private void getContinent() { // Spencer
         
         File folder = new File("ContinentsAndOceania/");
         File[] continents = folder.listFiles();
