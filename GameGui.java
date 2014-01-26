@@ -42,7 +42,7 @@ public class GameGui implements ActionListener {
 	}
     }
 
-    public void actionPerformed(ActionEvent e) { //Caspar and Andrew
+    public void actionPerformed(ActionEvent e) { //All of us
 	if (!stop) { //Prevents hitting buttons while going to next flag slide
 	    if (e.getSource() == quit) {
 		fg.createMenuGui();
@@ -55,11 +55,19 @@ public class GameGui implements ActionListener {
 		c[correctChoice].setBorderPainted(false);
 
 		if (e.getSource() == c[correctChoice]) {
-		    System.out.println("Correct");
-		    correct.add(c[correctChoice].getText());
-		    score++;
+		     updateBasicStats(true);
+		     updateSpecificStats(true, getContinent());
+                     System.out.println("Correct!");
+                     correct.add(c[correctChoice].getText());
+                     c[clicked].setBackground(Color.RED);
+                     c[clicked].setOpaque(true);
+                     c[clicked].setBorderPainted(false);
+		     System.out.println("Correct");
+//		     score++;
 		}
 		else {
+		    updateBasicStats(false);
+                    updateSpecificStats(false, getContinent());
 		    JButton clicked = (JButton) e.getSource();
 		    System.out.println("Incorrect. The correct answer was " + c[correctChoice].getText());
 		    incorrect.add(c[correctChoice].getText());
@@ -164,7 +172,34 @@ public class GameGui implements ActionListener {
 		names[i] = images[counter].toString();
 	    }
     }
+    
+    private void getContinent() { // Spencer with some help from StackOverflow
+        
+        File folder = new File("ContinentsAndOceania/");
+        File[] continents = folder.listFiles();
+        contNames = new String[continents.length-1]; // to account for README.md
+        int counter = 0;
+        
+        for (int i = 0; i < continents.length; i++; counter++) {
+                if (continents[i].getName().endsWith(".md")
+                        counter++;
+                contNames[i] = continents[counter]; // {America.txt, Asia.txt, etc.}
+        }
+        
+        for (int i = 0; i < contNames.length; i++) {
+                BufferedReader in = new BufferedReader(new FileReader("ContinentsAndOceania/" + contNames[i].toString());
+                String str;
+                
+                List<string> list = new ArrayList<String>();
 
+                while((str = in.readLine()) != null){
+                    list.add(str);
+                }
+
+                String[] stringArr = list.toArray(new String[0]);
+        }
+    }
+         
     private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
 	boolean valid;
