@@ -1,10 +1,7 @@
-import java.io.*;            // __
-import java.util.Properties; //   |
-//import java.util.Timer;      //   |
-import java.util.Scanner;    //   |-- Had to do this due to Class ambiguity problem.
-import java.util.Hashtable;  //   |
-import java.util.Date;       //   |
-import java.util.Random;     // __|
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Random;
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,20 +10,25 @@ import javax.imageio.*;
 import java.util.concurrent.TimeUnit;
 
 public class GameGui implements ActionListener {
+    private FlagGame fg;
     private JFrame frame;
     private Container content;
     private JLabel flag;
     private JLabel scoreLabel;
+    private JLabel modifierLabel;
     private JButton[] c;
     private JButton quit;
     private Random r;
     private String[] names;
     private Dimension flagD;
-    public String currentFlag;
-    public int score = 0;
-    public int x = 0; //Determines which button is correct
+    private boolean stop;
+    private int score;
+    private int type;
+    private int modifier;
+    private ArrayList<String> correct = new ArrayList<String>();
+    private ArrayList<String> incorrect = new ArrayList<String>();
+    private int correctChoice = 0; //Determines which button is correct
 
-    
     private JLabel labelImage(String path) {
  	BufferedImage image;
 	try {
@@ -39,46 +41,48 @@ public class GameGui implements ActionListener {
 	    return null;
 	}
     }
-    
-    public void actionPerformed(ActionEvent e) { //Caspar
-	if (e.getSource() == quit){
-	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
-	    frame.getContentPane().removeAll();
-	    init();
-	}
-	else {
-	    int clicked = 0;
-	    if (e.getSource() == c[1])
-		clicked = 1;
-	    if (e.getSource() == c[2])
-		clicked = 2;
-	    if (e.getSource() == c[3])
-		clicked = 3;
-	    c[x].setBackground(Color.GREEN);
-	    c[x].setOpaque(true);
-	    c[x].setBorderPainted(false);
-	    if (clicked == x){
-		updateBasicStats(true);
-		System.out.println("Correct!");
+
+    public void actionPerformed(ActionEvent e) { //Caspar and Andrew
+	if (!stop) { //Prevents hitting buttons while going to next flag slide
+	    if (e.getSource() == quit) {
+		fg.createMenuGui();
+		frame.dispose();
 	    }
 	    else {
-	    	updateBasicStats(false);
-	    	updateSpecificStats(false, )
-		System.out.println("Incorrect. The correct answer was " + currentFlag);
-		c[clicked].setBackground(Color.RED);
-		c[clicked].setOpaque(true);
-		c[clicked].setBorderPainted(false);
+		modifier--;
+		c[correctChoice].setBackground(Color.GREEN); //Correct answer turns green either way
+		c[correctChoice].setOpaque(true);
+		c[correctChoice].setBorderPainted(false);
+
+		if (e.getSource() == c[correctChoice]) {
+		    System.out.println("Correct");
+		    correct.add(c[correctChoice].getText());
+		    score++;
+		}
+		else {
+		    JButton clicked = (JButton) e.getSource();
+		    System.out.println("Incorrect. The correct answer was " + c[correctChoice].getText());
+		    incorrect.add(c[correctChoice].getText());
+		    clicked.setBackground(Color.RED);
+		    clicked.setOpaque(true);
+		    clicked.setBorderPainted(false);
+		}
+
+		if (modifier == 0)
+		    finish();
+		else
+		    delayedReset();
 	    }
-	    delayedReset();
-      	}
+	}
     }
-    
-    
-  
-    
-    public GameGui() {
+        
+    public GameGui(FlagGame fg, int type, int modifier) {
+	this.fg = fg;
+	this.type = type;
+        this.modifier = modifier;
 	frame = new JFrame("Flag Game");
-		
+	score = 0;
+	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	init();
     }
     
@@ -98,31 +102,52 @@ public class GameGui implements ActionListener {
 	    frame.getContentPane().add(c[i]);
 	}
 
-	//quit = new JButton("Quit");
-	//quit.addActionListener(this);
-	//frame.getContentPane().add(quit);
+	quit = new JButton("Quit");
+	quit.addActionListener(this);
+	frame.getContentPane().add(quit);
 	
+	modifierLabel = new JLabel("Flags Left: " + modifier);
+	modifierLabel.setForeground(Color.white);
+	frame.getContentPane().add(modifierLabel);
+
 	scoreLabel = new JLabel("Score: " + score);
 	scoreLabel.setForeground(Color.white);
 	frame.getContentPane().add(scoreLabel);
 	
-	runLabel = new JLabel("Current run: " + currentStreak);
-        runLabel.setForeground(Color.white);
-        frame.getContentPane().add(runLabel);
-        
-        bestLabel = new JLabel("Best run: " + longestStreak);
-        bestLabel.setForeground(Color.white);
-        frame.getContentPane().add(bestLabel);
-
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
 	frame.setMinimumSize(new Dimension(800, 600));
 	frame.setVisible(true);
-	frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+    }
 
+    public void finish() {
+	for (int i=0; i<frame.getContentPane().getComponentCount(); i++)
+	    frame.getContentPane().getComponent(i).setBounds(0,0,0,0);
 
+	frame.getContentPane().removeAll();
+	frame.getContentPane().setLayout(new EndLayout());
 
+	JLabel finished = new JLabel("Game Finished!");
+	scoreLabel = new JLabel("Score: " + score);
+	JLabel correctLabel = new JLabel("<html> Correct: " + arrayListString(correct) + "</html>");
+	JLabel incorrectLabel = new JLabel("<html> Incorrect: " + arrayListString(incorrect) + "</html>");
 
+	quit = new JButton("Continue");
+	quit.addActionListener(this);
+
+	finished.setForeground(Color.white);
+	scoreLabel.setForeground(Color.white);
+	correctLabel.setForeground(Color.white);
+	incorrectLabel.setForeground(Color.white);
+
+	frame.getContentPane().add(finished);
+	frame.getContentPane().add(scoreLabel);
+	frame.getContentPane().add(correctLabel);
+	frame.getContentPane().add(incorrectLabel);
+	frame.getContentPane().add(quit);
+
+	fg.addCorrect(correct);
+	fg.addIncorrect(incorrect);
     }
 
     private void getNames() { //Caspar
@@ -133,47 +158,19 @@ public class GameGui implements ActionListener {
 	
 	for (int i = 0; i < names.length; i++, counter++) 
 	    {
-		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
+		if (!images[counter].getName().endsWith(".png") || images[counter].getName().contains("Title.png"))
 		    counter++;
 
 		names[i] = images[counter].toString();
-	    };
+	    }
     }
-    
-    // the following gets the continent of the current country
-    
-    //private void getContinent() { // Spencer
-        
-        File folder = new File("ContinentsAndOceania/");
-        File[] continents = folder.listFiles();
-        contNames = new String[continents.length-1]; // to account for README.md
-        int counter = 0;
-        
-        for (int i = 0; i < continents.length; i++; counter++) {
-        	if (continents[i].getName().endsWith(".md")
-        		counter++;
-        	contNames[i] = continents[counter]; // {America.txt, Asia.txt, etc.}
-        }
-        
-        for (int i = 0; i < contNames.length; i++) {
-        	BufferedReader in = new BufferedReader(new FileReader("ContinentsAndOceania/" + contNames[i].toString());
-        	String str;
-        	
-        	List<string> list = new ArrayList<String>();
-
-	        while((str = in.readLine()) != null){
-	            list.add(str);
-        	}
-
-	        String[] stringArr = list.toArray(new String[0]);
-	 }
 
     private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
 	boolean valid;
 	c = new JButton[4];
 
-	x = r.nextInt(4); // the index of the button to be given the correct answer
+	correctChoice = r.nextInt(4); // the index of the button to be given the correct answer
 
         for (int i = 0; i < 4; i++) {
 	    valid = false;
@@ -196,49 +193,39 @@ public class GameGui implements ActionListener {
 		c[i].setFont(new Font("Serif", Font.PLAIN, 15)); //This one is not serified for some reason..
 	}
 
-	flag = labelImage(choices[x]);
-	currentFlag = readName(choices[x]); //not redundant, this one's a String. 	
+	flag = labelImage(choices[correctChoice]);	
     }
     
     private String readName (String in) { //Caspar
 	return in.replace("Images/","").replace(".png","").replace("_"," ");
     }
 
-    public static void pause(int seconds){
-	Date start = new Date();
-	Date end = new Date();
-	while(end.getTime() - start.getTime() < seconds * 1000){
-	    end = new Date();
-	}
-    }
-    
-    public void holdUp(){ //Caspar
-	try{
-	    Thread.sleep(200);
-	    //TimeUnit.SECONDS.sleep(2);
-	}
-	catch (Exception e){
-	    System.out.println(e);
-	}
-    }
-    
     public void delayedReset() {
+	stop = true;
 	new Thread() {
 	    public void run() {
-		try{
+		try {
 		    TimeUnit.MILLISECONDS.sleep(500); //Will need a try/catch
 		    SwingUtilities.invokeLater(new Runnable() {
 			    public void run() {
 				frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
 				frame.getContentPane().removeAll();
 				init();
+				stop = false;
 			    }
 			});
 		}
-		catch(Exception except){
+		catch(Exception except) {
 		}
 	    }
 	}.start();
     }
-    
+
+    public String arrayListString(ArrayList<String> L) {
+	String ans = "";
+	for (String s : L)
+	    ans += s + ", ";
+	
+	return ans.substring(0, ans.length()-2);
+    }
 }
