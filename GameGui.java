@@ -140,23 +140,33 @@ public class GameGui implements ActionListener {
 	    };
     }
     
-    /*private void getContinent() {
-	File folder = new File("Images/");
-	File[] images = folder.listFiles(); 
-	names = new String[images.length-2]; //Ignoring title.png and README.md
-	int counter = 0; //Accounts for when skipping over unwanted files
-	
-	for (int i = 0; i < names.length; i++, counter++) 
-	    {
-		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
-		    counter++;
+    // the following gets the continent of the current country
+    
+    //private void getContinent() { // Spencer
+        
+        File folder = new File("ContinentsAndOceania/");
+        File[] continents = folder.listFiles();
+        contNames = new String[continents.length-1]; // to account for README.md
+        int counter = 0;
+        
+        for (int i = 0; i < continents.length; i++; counter++) {
+        	if (continents[i].getName().endsWith(".md")
+        		counter++;
+        	contNames[i] = continents[counter]; // {America.txt, Asia.txt, etc.}
+        }
+        
+        for (int i = 0; i < contNames.length; i++) {
+        	BufferedReader in = new BufferedReader(new FileReader("ContinentsAndOceania/" + contNames[i].toString());
+        	String str;
+        	
+        	List<string> list = new ArrayList<String>();
 
-		names[i] = images[counter].toString();
-	    };
-    }
-    }
+	        while((str = in.readLine()) != null){
+	            list.add(str);
+        	}
 
-    */
+	        String[] stringArr = list.toArray(new String[0]);
+	 }
 
     private void assignButtons() { //Spencer's Code
 	String[] choices = new String[4];
