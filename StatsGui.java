@@ -18,7 +18,7 @@ public class StatsGui {
 	public double oceafricasiaPercentage = 0.0;
 	
 	public void updateBasicStats(boolean input) {
-		numGuesses += 1
+		numGuesses += 1;
 		if (input = true) {
 			score += 1;
 			currentStreak += 1;
