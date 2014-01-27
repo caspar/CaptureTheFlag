@@ -3,8 +3,12 @@
 
 
 ### Rules:
-- Sign off on commits & comments
-- Comment an explanation of anything you've written that isn't totally obvious
+- "Capture the Flag" a game where you guess the country of a flag in an arcade (number of flags) or timed game mode
+- Statistics after playing about countries' colors and respective continents
+- Issues:
+- Statistics loads slowly
+- Statistics breaks occasionally due to not matching text files
+- Statistics can load when no games have been played
 
 ### Ideas & Implementation:
 - Different modes of gameplay
