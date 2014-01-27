@@ -293,7 +293,7 @@ public class GameGui implements ActionListener {
 	
 	return ans.substring(0, ans.length()-2);
     }
-}
+
 
     public void updateBasicStats(boolean input) {
                 numGuesses += 1;
@@ -336,3 +336,4 @@ public class GameGui implements ActionListener {
         public boolean racistCheck() {
                 return ((ameurocaPercentage - oceafricasiaPercentage >= 15.0));
         }
+}
