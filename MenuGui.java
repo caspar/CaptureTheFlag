@@ -11,12 +11,13 @@ public class MenuGui implements ActionListener {
     private JFrame frame;
     private JLabel background;
     private JLabel title;
+    private JLabel desc;
     private JButton play;
     private JButton stats;
     private JButton quit;
     private JButton arcade;
     private JButton timed;
-    private JButton group;
+    private JTextField mod;
     private boolean played;
     private int next;
 
@@ -38,16 +39,20 @@ public class MenuGui implements ActionListener {
 		played = true;
 		arcade = new JButton("Arcade");
 		timed = new JButton("Timed");
-		group = new JButton("Group");
+		desc = new JLabel("     # Flags/Seconds");
+		desc.setForeground(Color.white);
+		desc.setSize(100, 10);
+		mod = new JTextField(1);
 
 		arcade.addActionListener(this);
 		timed.addActionListener(this);
-		group.addActionListener(this);
 	    
-		JPanel box = new JPanel(new FlowLayout());
+		JPanel box = new JPanel(new GridLayout(1, 4));
+		box.setSize(300, 20);
 		box.add(arcade);
 		box.add(timed);
-		box.add(group);
+		box.add(desc);
+		box.add(mod);
 		frame.getContentPane().add(box);
 
 		frame.setVisible(true);
@@ -56,20 +61,20 @@ public class MenuGui implements ActionListener {
 	else if (e.getSource() == quit)
 	    System.exit(0);
 	else if (e.getSource() == stats) {
-	    fg.createGameGui();
+	    fg.createStatsGui();
 	    frame.setVisible(false);
 	}
-	else if (e.getSource() == arcade) {
-	    fg.createGameGui();
-	    frame.setVisible(false);
+	else if (e.getSource() == arcade && mod.getText() != "") {
+	    if (Integer.parseInt(mod.getText()) >= 5) {
+		fg.createGameGui(0, Integer.parseInt(mod.getText()));
+		frame.setVisible(false); 
+	    }
 	}
-	else if (e.getSource() == timed) {
-	    fg.createGameGui();
-	    frame.setVisible(false);
-	}
-	else if (e.getSource() == group) {
-	    fg.createGameGui();
-	    frame.setVisible(false);
+	else if (e.getSource() == timed && mod.getText() != "") {
+	    if (Integer.parseInt(mod.getText()) >= 5) {
+		fg.createGameGui(1, Integer.parseInt(mod.getText()));
+		frame.setVisible(false);
+	    }
 	}
     }
 
