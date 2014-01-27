@@ -23,8 +23,11 @@ public class GameGui implements ActionListener {
     private String[] names;
     private Dimension flagD;
     public String currentFlag;
-    public int score = 0;
+    public int right = 0;
+    public int wrong = 0;
+    public int asked = 0;
     public int x = 0; //Determines which button is correct
+    public double percentCorrect = 0.0;
 
     
     private JLabel labelImage(String path) {
@@ -47,6 +50,7 @@ public class GameGui implements ActionListener {
 	    init();
 	}
 	else {
+	    asked++;
 	    int clicked = 0;
 	    if (e.getSource() == c[1])
 		clicked = 1;
@@ -58,25 +62,23 @@ public class GameGui implements ActionListener {
 	    c[x].setOpaque(true);
 	    c[x].setBorderPainted(false);
 	    if (clicked == x){
-		score ++;
+		right ++;
 		System.out.println("Correct!");
+		delayedReset(500);
 	    }
 	    else {
 		System.out.println("Incorrect. The correct answer was " + currentFlag);
+		wrong++;
 		c[clicked].setBackground(Color.RED);
 		c[clicked].setOpaque(true);
 		c[clicked].setBorderPainted(false);
+		delayedReset(1200);
 	    }
-	    delayedReset();
       	}
     }
-    
-    
-  
-    
+        
     public GameGui() {
 	frame = new JFrame("Flag Game");
-		
 	init();
     }
     
@@ -99,10 +101,15 @@ public class GameGui implements ActionListener {
 	//quit = new JButton("Quit");
 	//quit.addActionListener(this);
 	//frame.getContentPane().add(quit);
-	
-	scoreLabel = new JLabel("Score: " + score);
+	if (asked > 0){
+	    percentCorrect = (right/asked) * 100;
+	    scoreLabel = new JLabel("Score: " + percentCorrect + "%");
+	}
+	else 
+	    scoreLabel = new JLabel("Score:     ");
 	scoreLabel.setForeground(Color.white);
 	frame.getContentPane().add(scoreLabel);
+	
 
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
@@ -176,7 +183,7 @@ public class GameGui implements ActionListener {
     
     public void holdUp(){ //Caspar
 	try{
-	    Thread.sleep(200);
+	    Thread.sleep(600);
 	    //TimeUnit.SECONDS.sleep(2);
 	}
 	catch (Exception e){
@@ -184,11 +191,11 @@ public class GameGui implements ActionListener {
 	}
     }
     
-    public void delayedReset() {
+    public void delayedReset(final int time) {
 	new Thread() {
 	    public void run() {
 		try{
-		    TimeUnit.MILLISECONDS.sleep(500); //Will need a try/catch
+		    TimeUnit.MILLISECONDS.sleep(time); //Will need a try/catch
 		    SwingUtilities.invokeLater(new Runnable() {
 			    public void run() {
 				frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
