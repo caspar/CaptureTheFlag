@@ -18,7 +18,7 @@ public class GameLayout implements LayoutManager {
 
     public void layoutContainer(Container parent) {
 	int nComps = parent.getComponentCount();
-	if (nComps >= 5) {
+	if (nComps > 7) {
 	    int h = parent.getHeight();
 	    int w = parent.getWidth();
 	    Component c = parent.getComponent(0);
@@ -34,6 +34,10 @@ public class GameLayout implements LayoutManager {
 	    c.setBounds(w*3/5 - 75, h*2/3 - 25, 150, 50);
 	    c = parent.getComponent(5);
 	    c.setBounds(10, 10, 75, 25);
+	    c = parent.getComponent(6);
+	    c.setBounds(w-225, 10, 125, 25);
+	    c = parent.getComponent(7);
+	    c.setBounds(w-85, 10, 75, 25);
 	}
     }
 }

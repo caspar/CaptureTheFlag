@@ -9,24 +9,50 @@ import java.util.concurrent.TimeUnit;
 
 
 public class FlagGame {
+    private static FlagGame fg;
     private static String[] names;
     private static Hashtable<Color, String> colorDict;
     private static Hashtable<String, String> countryColors;
-  
-    //we need some way to store things like highscores, statistics, playernames, saved games, etc. 
-    //any ideas? - C
-    
-    // text files should do the trick. Players should input a username and password if they want to have their
-    // highscores, stats, etc. saved, otherwise they will just be relocated to a temporary file that will be
-    // deleted every time they quit. Sound good? -SW 
-    //	Yes. Or we could just have a drop-down member with past players (probably no easier to write)
+    private static ArrayList<String> correct = new ArrayList<String>();
+    private static ArrayList<String> incorrect = new ArrayList<String>();
+    private static MenuGui mg;
+    private static GameGui gg;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
+	fg = new FlagGame();
 	System.out.println("Loading...");
-	getNames();
-	assembleColorDict();
-	assignColors();
-	GameGui GG = new GameGui();
+	fg.createMenuGui();
+	//getNames();
+	//assembleColorDict();
+	//assignColors();
+	/*	MenuGui g = new MenuGui();
+	if (g.next() != -1) {
+	    switch(g.next()) {
+	    case 0: gg = new GameGui(0); //arcade
+		break;
+	    case 1: gg = new GameGui(1); //timed
+		break;
+	    case 2: gg = new GameGui(2); //group
+		break;
+	    case 3: break;
+	    }
+	    }*/
+    }
+
+    public void createMenuGui() {
+	mg = new MenuGui(fg);
+    }
+
+    public void createGameGui() {
+	gg = new GameGui(fg, 0, 5);
+    }
+
+    public void addCorrect(ArrayList<String> correct) {
+	this.correct.addAll(correct);
+    }
+
+    public void addIncorrect(ArrayList<String> incorrect) {
+	this.incorrect.addAll(incorrect);
     }
 
     private static void getNames() { //Mainly Caspar's Code

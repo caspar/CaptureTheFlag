@@ -7,6 +7,7 @@ import java.awt.image.*;
 import javax.imageio.*;
 
 public class MenuGui implements ActionListener {
+    private FlagGame fg;
     private JFrame frame;
     private JLabel background;
     private JLabel title;
@@ -17,6 +18,7 @@ public class MenuGui implements ActionListener {
     private JButton timed;
     private JButton group;
     private boolean played;
+    private int next;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -54,20 +56,30 @@ public class MenuGui implements ActionListener {
 	else if (e.getSource() == quit)
 	    System.exit(0);
 	else if (e.getSource() == stats) {
+	    fg.createGameGui();
+	    frame.setVisible(false);
 	}
 	else if (e.getSource() == arcade) {
+	    fg.createGameGui();
+	    frame.setVisible(false);
 	}
 	else if (e.getSource() == timed) {
+	    fg.createGameGui();
+	    frame.setVisible(false);
 	}
 	else if (e.getSource() == group) {
+	    fg.createGameGui();
+	    frame.setVisible(false);
 	}
     }
 
-    public MenuGui() {
+    public MenuGui(FlagGame fg) {
+	this.fg = fg;
 	played = false;
+	next = -1;
 
 	frame = new JFrame("Flag Game");
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	frame.getContentPane().setLayout(new MenuLayout());
 	
 	title = labelImage("Images/Title.png"); //From cooltext.com...
@@ -88,6 +100,6 @@ public class MenuGui implements ActionListener {
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
 	frame.setMinimumSize(new Dimension(800, 600));
-	frame.setVisiblamae(true);
+	frame.setVisible(true);
     }
 }
