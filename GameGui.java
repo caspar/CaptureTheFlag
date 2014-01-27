@@ -247,7 +247,7 @@ public class GameGui implements ActionListener {
         
         File folder = new File("ContinentsAndOceania/");
         File[] continents = folder.listFiles();
-        contNames = new String[continents.length-1]; // to account for README.md
+        String contNames = new String[continents.length-1]; // to account for README.md
         int counter = 0;
         
         for (int i = 0; i < continents.length; i++, counter++) {
