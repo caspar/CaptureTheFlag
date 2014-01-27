@@ -37,7 +37,7 @@ public class GameGui implements ActionListener {
 	    return new JLabel(new ImageIcon(image));
 	}
 	catch (IOException e) {
-	    System.out.println("ERROR");
+	    System.out.println("Oak: " + "\"This isn't the time to use that!\"");
 	    return null;
 	}
     }
@@ -122,6 +122,18 @@ public class GameGui implements ActionListener {
 	scoreLabel.setForeground(Color.white);
 	frame.getContentPane().add(scoreLabel);
 	
+	runLabel = new JLabel("Current run: " + currentStreak);
+	runLabel.setForeground(Color.white);
+	frame.getContentPane().add(runLabel);
+	
+	bestLabel = new JLabel("Longest run: " + longestStreak);
+	bestLabel.setForeground(Color.white);
+	frame.getContentPane().add(bestLabel);
+	
+	percentageLabel = new JLabel("Percentage of flags guessed correctly: " + overallGuessPercentage);
+	percentageLabel.setForeground(Color.white);
+	frame.getContentPane().add(percentageLabel);
+	
 	frame.setSize(1280, 800);
 	frame.setBackground(new Color(30,30,30));
 	frame.setMinimumSize(new Dimension(800, 600));
@@ -137,6 +149,10 @@ public class GameGui implements ActionListener {
 
 	JLabel finished = new JLabel("Game Finished!");
 	scoreLabel = new JLabel("Score: " + score);
+	bestLabel = new JLabel("Longest run: " + longestStreak);
+	percentageLabel = new JLabel("Overall percentage: " + guessPercentage);
+
+	frame.getContentPane().add(bestLabel);
 	JLabel correctLabel = new JLabel("<html> Correct: " + arrayListString(correct) + "</html>");
 	JLabel incorrectLabel = new JLabel("<html> Incorrect: " + arrayListString(incorrect) + "</html>");
 
@@ -147,11 +163,15 @@ public class GameGui implements ActionListener {
 	scoreLabel.setForeground(Color.white);
 	correctLabel.setForeground(Color.white);
 	incorrectLabel.setForeground(Color.white);
+	bestLabel.setForeground(Color.white);
+	percentageLabel.setForeground(Color.white);
 
 	frame.getContentPane().add(finished);
 	frame.getContentPane().add(scoreLabel);
 	frame.getContentPane().add(correctLabel);
 	frame.getContentPane().add(incorrectLabel);
+	frame.getContentPane().add(bestLabel);
+	frame.getContentPane().add(percentageLabel);
 	frame.getContentPane().add(quit);
 
 	fg.addCorrect(correct);
