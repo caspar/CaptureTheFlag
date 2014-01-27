@@ -40,6 +40,48 @@ public class GameGui implements ActionListener {
     private double ameurocaPercentage = 0.0;
     private double oceafricasiaPercentage = 0.0;
 
+    public void updateBasicStats(boolean input) {
+                numGuesses += 1;
+                if (input = true) {
+                        score += 1;
+                        currentStreak += 1;
+                        if (currentStreak >= longestStreak) {
+                                longestStreak += 1;
+                        }
+                }
+        }
+
+        public void updateSpecificStats(boolean input, String continent) {
+                if (continent == "America" || continent == "Europe") {
+                        ameurocaGuesses += 1;
+                        if (input == true) {
+                                ameurocaScore += 1;
+                        }
+                }
+                else {
+                        oceafricasiaGuesses += 1;
+                        if (input == true) {
+                                oceafricasiaScore += 1;
+                        }
+                }
+        }
+        
+        public void getOverallPercentage() {
+                overallGuessPercentage = score / numGuesses;
+        }
+        
+        public void getAmeurocaPercentage() {
+                ameurocaPercentage = ameurocaScore / ameurocaGuesses;
+        }
+        
+        public void getOceafricasiaPercentage() {
+                oceafricasiaPercentage = oceafricasiaScore / oceafricasiaGuesses;
+        }
+
+        public boolean racistCheck() {
+                return ((ameurocaPercentage - oceafricasiaPercentage >= 15.0));
+        }
+
     private JLabel labelImage(String path) {
  	BufferedImage image;
 	try {
@@ -94,7 +136,7 @@ public class GameGui implements ActionListener {
 	    }
 	}
     }
-        
+    
     public GameGui(FlagGame fg, int type, int modifier) {
 	this.fg = fg;
 	this.type = type;
@@ -158,11 +200,9 @@ public class GameGui implements ActionListener {
 	frame.getContentPane().setLayout(new EndLayout());
 
 	JLabel finished = new JLabel("Game Finished!");
-	scoreLabel = new JLabel("Score: " + score);
-	bestLabel = new JLabel("Longest run: " + longestStreak);
-	percentageLabel = new JLabel("Overall percentage: " + guessPercentage);
-
-	frame.getContentPane().add(bestLabel);
+	Jlabel scoreLabel = new JLabel("Score: " + score);
+	Jlabel bestLabel = new JLabel("Longest run: " + longestStreak);
+	JLabel percentageLabel = new JLabel("Overall percentage: " + guessPercentage);
 	JLabel correctLabel = new JLabel("<html> Correct: " + arrayListString(correct) + "</html>");
 	JLabel incorrectLabel = new JLabel("<html> Incorrect: " + arrayListString(incorrect) + "</html>");
 
@@ -203,7 +243,7 @@ public class GameGui implements ActionListener {
 	    }
     }
     
-    private void getContinent() { // Spencer with some help from StackOverflow
+    private void getContinent() { // Spencer with some help from Stack Overflow
         
         File folder = new File("ContinentsAndOceania/");
         File[] continents = folder.listFiles();
@@ -295,45 +335,5 @@ public class GameGui implements ActionListener {
     }
 
 
-    public void updateBasicStats(boolean input) {
-                numGuesses += 1;
-                if (input = true) {
-                        score += 1;
-                        currentStreak += 1;
-                        if (currentStreak >= longestStreak) {
-                                longestStreak += 1;
-                        }
-                }
-        }
-
-        public void updateSpecificStats(boolean input, String continent) {
-                if (continent == America || continent == Europe) {
-                        ameurocaGuesses += 1;
-                        if (input == true) {
-                                ameurocaScore += 1;
-                        }
-                }
-                else {
-                        oceafricasiaGuesses += 1;
-                        if (input == true) {
-                                oceafricasiaScore += 1;
-                        }
-                }
-        }
-        
-        public void getOverallPercentage() {
-                overallGuessPercentage = score / numGuesses;
-        }
-        
-        public void getAmeurocaPercentage() {
-                ameurocaPercentage = ameurocaScore / ameurocaGuesses;
-        }
-        
-        public void getOceafricasiaPercentage() {
-                oceafricasiaPercentage = oceafricasiaScore / oceafricasiaGuesses;
-        }
-
-        public boolean racistCheck() {
-                return ((ameurocaPercentage - oceafricasiaPercentage >= 15.0));
-        }
+    
 }
