@@ -28,6 +28,18 @@ public class GameGui implements ActionListener {
     private ArrayList<String> correct = new ArrayList<String>();
     private ArrayList<String> incorrect = new ArrayList<String>();
     private int correctChoice = 0; //Determines which button is correct
+    public boolean isRacist = true; // guilty until proven innocent
+        public int score = 0;
+        public int ameurocaScore = 0;
+        public int ameurocaGuesses = 0;
+        public int oceafricasiaScore = 0;
+        public int oceafricasiaGuesses = 0;
+        public int numGuesses = 0;
+        public int currentStreak = 0;
+        public int longestStreak = 0;
+        public double overallGuessPercentage = 0.0;
+        public double ameurocaPercentage = 0.0;
+        public double oceafricasiaPercentage = 0.0;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
