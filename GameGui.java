@@ -22,24 +22,23 @@ public class GameGui implements ActionListener {
     private String[] names;
     private Dimension flagD;
     private boolean stop;
-    private int score;
+    private int score = 0;
     private int type;
     private int modifier;
     private ArrayList<String> correct = new ArrayList<String>();
     private ArrayList<String> incorrect = new ArrayList<String>();
     private int correctChoice = 0; //Determines which button is correct
-    public boolean isRacist = true; // guilty until proven innocent
-        public int score = 0;
-        public int ameurocaScore = 0;
-        public int ameurocaGuesses = 0;
-        public int oceafricasiaScore = 0;
-        public int oceafricasiaGuesses = 0;
-        public int numGuesses = 0;
-        public int currentStreak = 0;
-        public int longestStreak = 0;
-        public double overallGuessPercentage = 0.0;
-        public double ameurocaPercentage = 0.0;
-        public double oceafricasiaPercentage = 0.0;
+    private boolean isRacist = true; // guilty until proven innocent
+    private int ameurocaScore = 0;
+    private int ameurocaGuesses = 0;
+    private int oceafricasiaScore = 0;
+    private int oceafricasiaGuesses = 0;
+    private int numGuesses = 0;
+    private int currentStreak = 0;
+    private int longestStreak = 0;
+    private double overallGuessPercentage = 0.0;
+    private double ameurocaPercentage = 0.0;
+    private double oceafricasiaPercentage = 0.0;
 
     private JLabel labelImage(String path) {
  	BufferedImage image;
@@ -101,7 +100,6 @@ public class GameGui implements ActionListener {
 	this.type = type;
         this.modifier = modifier;
 	frame = new JFrame("Flag Game");
-	score = 0;
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	init();
     }
@@ -212,14 +210,14 @@ public class GameGui implements ActionListener {
         contNames = new String[continents.length-1]; // to account for README.md
         int counter = 0;
         
-        for (int i = 0; i < continents.length; i++; counter++) {
-                if (continents[i].getName().endsWith(".md")
+        for (int i = 0; i < continents.length; i++, counter++) {
+                if (continents[i].getName().endsWith(".md"))
                         counter++;
                 contNames[i] = continents[counter]; // {America.txt, Asia.txt, etc.}
         }
         
         for (int i = 0; i < contNames.length; i++) {
-                BufferedReader in = new BufferedReader(new FileReader("ContinentsAndOceania/" + contNames[i].toString());
+                BufferedReader in = new BufferedReader(new FileReader("ContinentsAndOceania/" + contNames[i].toString()));
                 String str;
                 
                 List<string> list = new ArrayList<String>();
@@ -296,3 +294,45 @@ public class GameGui implements ActionListener {
 	return ans.substring(0, ans.length()-2);
     }
 }
+
+    public void updateBasicStats(boolean input) {
+                numGuesses += 1;
+                if (input = true) {
+                        score += 1;
+                        currentStreak += 1;
+                        if (currentStreak >= longestStreak) {
+                                longestStreak += 1;
+                        }
+                }
+        }
+
+        public void updateSpecificStats(boolean input, String continent) {
+                if (continent == America || continent == Europe) {
+                        ameurocaGuesses += 1;
+                        if (input == true) {
+                                ameurocaScore += 1;
+                        }
+                }
+                else {
+                        oceafricasiaGuesses += 1;
+                        if (input == true) {
+                                oceafricasiaScore += 1;
+                        }
+                }
+        }
+        
+        public void getOverallPercentage() {
+                overallGuessPercentage = score / numGuesses;
+        }
+        
+        public void getAmeurocaPercentage() {
+                ameurocaPercentage = ameurocaScore / ameurocaGuesses;
+        }
+        
+        public void getOceafricasiaPercentage() {
+                oceafricasiaPercentage = oceafricasiaScore / oceafricasiaGuesses;
+        }
+
+        public boolean racistCheck() {
+                return ((ameurocaPercentage - oceafricasiaPercentage >= 15.0));
+        }
