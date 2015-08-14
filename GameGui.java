@@ -32,7 +32,7 @@ public class GameGui implements ActionListener {
 	    return null;
 	}
     }
-       
+
     public void actionPerformed(ActionEvent e) { //Caspar
 	if (e.getSource() == quit){
 	    frame.getContentPane().getComponent(0).setBounds(0,0,0,0);
@@ -124,7 +124,7 @@ public class GameGui implements ActionListener {
 	flag.setSize(flagD);
 
 	frame.setContentPane(content);
-	frame.getContentPane().setLayout(new GameLayout());
+	//frame.getContentPane().setLayout(new GameLayout());
 	frame.getContentPane().add(flag);
 
         for (int i=0; i<4; i++) {
@@ -144,11 +144,11 @@ public class GameGui implements ActionListener {
 
     private void getNames() { //Caspar
 	File folder = new File("Images/");
-	File[] images = folder.listFiles(); 
+	File[] images = folder.listFiles();
 	names = new String[images.length-2]; //Ignoring title.png and README.md
 	int counter = 0; //Accounts for when skipping over unwanted files
-	
-	for (int i = 0; i < names.length; i++, counter++) 
+
+	for (int i = 0; i < names.length; i++, counter++)
 	    {
 		if (!images[i].getName().endsWith(".png") || images[i].getName() == "Title.png")
 		    counter++;
@@ -186,11 +186,11 @@ public class GameGui implements ActionListener {
 	}
 
 	flag = labelImage(choices[x]);
-	currentFlag = readName(choices[x]); //not redundant, this one's a String. 
+	currentFlag = readName(choices[x]); //not redundant, this one's a String.
 	System.out.println(c[1]);
-	
+
     }
-    
+
     private String readName (String in) { //Caspar
 	return in.replace("Images/","").replace(".png","").replace("_"," ");
     }
@@ -202,7 +202,7 @@ public class GameGui implements ActionListener {
 	    end = new Date();
 	}
     }
-    
+
     public void holdUp(){ //Caspar
 	try{
 	    TimeUnit.SECONDS.sleep(2);

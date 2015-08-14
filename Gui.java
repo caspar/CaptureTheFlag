@@ -6,18 +6,15 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-<<<<<<< HEAD
-public class Gui  extends JFrame implements ActionListener {
-=======
+
 public class Gui extends JFrame {
->>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
- 
-    
- 
+
+
+
     Game Game = new Game();
     Random Rand = new Random();
 
-    //private ArrayList<String> flagList = new ArrayList<String>(); 
+    //private ArrayList<String> flagList = new ArrayList<String>();
 
     private String imagePath = "Images/";
 
@@ -40,7 +37,7 @@ public class Gui extends JFrame {
     JButton button4 = new JButton(b4);
     private JButton[] answers = {button1, button2, button3, button4};
 
-    
+
     public Gui() { //CASPAR
 =======
     private String[] abcd = {"A. ","B. ","C. ","D. "};
@@ -54,13 +51,13 @@ public class Gui extends JFrame {
     JButton button3 = new JButton(b3);
     JButton button4 = new JButton(b4);
     private JButton[] answers = {button1, button2, button3, button4};
-   
+
     public Gui() {
 >>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
 	setTitle("Flag Game");
 	setSize(700, 400); //should be fullscreen (1280, 800)
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	
+
 	pane = this.getContentPane();
 
 	readDir();
@@ -71,14 +68,14 @@ public class Gui extends JFrame {
     }
 
     public void actionPerformed(ActionEvent e){ //CASPAR
-	
+
 
     }
-    
+
     public JLabel newImage(){  //CASPAR
 	//newImage() should randomly select a flag, and call newButtons()
 	String newFlag = (Game.flagList).get(Rand.nextInt(223));
-	
+
        	flagLabel = new JLabel(createImageIcon(imagePath + newFlag, "Germany"));
 	countryNameLabel = new JLabel(getName(newFlag));
 	pane.add(countryNameLabel);
@@ -86,9 +83,9 @@ public class Gui extends JFrame {
 	this.update(this.getGraphics());
 	return flagLabel;
     }
-       
+
     public void assignAnswersToButtons(String[] answers) {
-        
+
         Random rand = new Random();
         int r = rand.nextInt(4); // the index of the button to be given the correct answer
 
@@ -100,8 +97,8 @@ public class Gui extends JFrame {
         choices[r] = abcd[r] + "path of answer"; // reassigns the correct answer to the random button
         answers[r] = choices[r];
     }
-    
-    
+
+
     public int longestCountry(){ //CASPAR
 	int longest = 0;
 	for (int i = 0; i < 223; i ++){
@@ -122,18 +119,18 @@ public class Gui extends JFrame {
 	System.out.println(output);
 	return output;
     }
-    
+
 
 
     public void readDir(){ //Cite source (not mine)
-	String path = "./Images/"; 	
+	String path = "./Images/";
 	String files;
 	File folder = new File(path);
-	File[] listOfFiles = folder.listFiles(); 
-	
-	for (int i = 0; i < listOfFiles.length; i++) 
+	File[] listOfFiles = folder.listFiles();
+
+	for (int i = 0; i < listOfFiles.length; i++)
 	    {
-		if (listOfFiles[i].isFile()) 
+		if (listOfFiles[i].isFile())
 		    {
 			files = listOfFiles[i].getName();
 			if (files.endsWith(".png"))
@@ -144,11 +141,11 @@ public class Gui extends JFrame {
 	    }
     }
 <<<<<<< HEAD
-       
+
 =======
-    
+
     public void assignAnswersToButtons(String[] answers) {
-        
+
         Random rand = new Random();
 	int r = rand.nextInt(4); // the index of the button to be given the correct answer
 
@@ -161,8 +158,8 @@ public class Gui extends JFrame {
         answers[r] = choices[r];
 }
 
-    
-    
+
+
 >>>>>>> 42e3a9a24681131214b6aff91c6de53f14fed217
     protected ImageIcon createImageIcon(String path, String description) {
         java.net.URL imgURL = getClass().getResource(path);
@@ -174,6 +171,6 @@ public class Gui extends JFrame {
         }
     }
 
-    
-    
+
+
 }
