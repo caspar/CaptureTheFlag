@@ -174,7 +174,7 @@ public class GameGui implements ActionListener {
 		    if (choices[i] == choices[j])
 			valid = false;
 		}
-	    }
+    }
 
 	    c[i] = new JButton(readName(choices[i].substring(7)));
 	    if (choices[i].length() > 35) //Accounts for really long country names
@@ -191,7 +191,7 @@ public class GameGui implements ActionListener {
 
     }
 
-    private String readName (String in) { //Caspar
+    private String readName(String in) { //Caspar
 	return in.replace("Images/","").replace(".png","").replace("_"," ");
     }
 

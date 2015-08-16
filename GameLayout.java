@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public class GameLayout implements LayoutManager {
+
     public void addLayoutComponent(String name, Component comp) {
     }
 

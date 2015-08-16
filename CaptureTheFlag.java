@@ -1,18 +1,38 @@
-import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.awt.Image;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 
-public class CaptureTheFlag{
+/**
+ * @author Caspar Lant
+ * TODO center flag image
+ * TODO learn about buttons
+ */
+public class CaptureTheFlag extends JFrame{
+
+    public static final String PATH = "img/flags/";
+    public final GameLayout layout = new GameLayout();
 
     public static void main(String[] args){
-        File   folder = new File("img/flags/");
-        File[] images = folder.listFiles();
-        for (File image : images){
-            System.out.println(image.getName());
-        }
-        GameGui game = new GameGui();
+        CaptureTheFlag game = new CaptureTheFlag(args[0]);
     }
 
-    // getNames(){
-    //     File   folder = new File("images/");
-    //     File[] images = folder.listFiles();
-    // }
+    /**
+     * CaptureTheFlag Constructor
+     * @date   2015-08-15
+     * @param  flagname   Flag's Name
+     */
+    public CaptureTheFlag(String flagname){
+        File   folder = new File(PATH);
+        File[] images = folder.listFiles();
+        DisplayFlag(PATH + flagname);
+        //GameGui game = new GameGui();
+    }
+
+    private void DisplayFlag(String flag){
+        ImageImplement panel = new ImageImplement(new ImageIcon(flag+".png").getImage());
+        add(panel); setVisible(true); setSize(470, 335); setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
 }
